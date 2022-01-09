@@ -3,7 +3,7 @@ GREEN="$(printf '\033[32m')"
 
 ###########
 
-PREFIX='/data/data/com.termux/files'
+PREFIX='/data/data/com.termux/files/usr'
 DIR="$(pwd)"
 
 banner() {
@@ -16,7 +16,7 @@ requirements() {
                 { echo "    ${BLUE}[${RED}*${BLUE}] ${GREEN}Python is already Installed!"; }
         else
                 { pkg update -y; pkg install -y python ; }
-                (type -p wget tput &> /dev/null) && { echo; echo "    ${GREEN}Python is succesfully installed!"; } || { echo; echo "    ${RED}Error Occured, failed to install dependencies."; echo; reset_color; exit 1; }
+                (type -p python &> /dev/null) && { echo; echo "    ${GREEN}Python is succesfully installed!"; } || { echo; echo "    ${RED}Error Occured, failed to install dependencies."; echo; reset_color; exit 1; }
         fi
 }
 install(){
@@ -25,11 +25,11 @@ install(){
 
         # Coping files
      echo "    ${GREEN}Coping files "
-    cp $DIR/termux_startup.py $PREFIX/home/.termuxstartup.py
-    cp $PREFIX/usr/etc/bash.bashrc $PREFIX/usr/etc/bash.bashrc.bak
-    echo python $HOME/.termuxstartup.py >> $PREFIX/usr/etc/bash.bashrc
+    cp $DIR/termux_startup.py $PREFIX/../home/.termuxstartup.py
+    cp $PREFIX/etc/bash.bashrc $PREFIX/etc/bash.bashrc.bak
+    echo python $HOME/.termuxstartup.py >> $PREFIX/etc/bash.bashrc
         # Verify files
-        if [[ (-f $PREFIX/home/.termuxstartup.py)  ]]; then
+        if [[ (-f $PREFIX/../home/.termuxstartup.py)  ]]; then
             echo; echo "    ${GREEN}Successfully Installed."
         fi
 
